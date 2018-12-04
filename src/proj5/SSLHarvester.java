@@ -12,7 +12,6 @@ import javax.security.cert.X509Certificate;
 public class SSLHarvester {
 	private static final boolean debug = false;
 	private static final boolean debug_response = false;
-	//provided by the assignment
 	
 	public static void getCert(String address) {
 		String host;
@@ -38,8 +37,8 @@ public class SSLHarvester {
 			
 			//provided by the assignment
 			//From https://www.baeldung.com/java-ssl
-			//SSLSocketFactory sslsocketfactory = connection.getSSLSocketFactory();
-			SSLSocketFactory sslsocketfactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
+			SSLSocketFactory sslsocketfactory = connection.getSSLSocketFactory();
+			//SSLSocketFactory sslsocketfactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
 			SSLSocket sslsocket = (SSLSocket) sslsocketfactory.createSocket(host, port);
 
 			
@@ -53,6 +52,7 @@ public class SSLHarvester {
 			
 			BufferedReader in = new BufferedReader(new InputStreamReader(sslsocket.getInputStream()));
 			BufferedWriter out = new BufferedWriter (new OutputStreamWriter (sslsocket.getOutputStream()));
+			//REQUEST_BUFFER provided by the assignment
 			String REQUEST_BUFFER = "GET /robots.txt HTTP/1.1\r\n" +
 			        "Host: " + address + "\r\n" +
 			        "\r\n";
